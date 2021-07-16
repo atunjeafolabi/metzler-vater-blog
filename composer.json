@@ -1,12 +1,20 @@
 {
-    "name": "laravel/laravel",
+    "name": "Metzler Vater Blog",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "A simple blog",
     "keywords": [
         "framework",
         "laravel"
     ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Afolabi Olatunji",
+            "email": "atunje_afolabi@yahoo.com",
+            "homepage": "http://atunje.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^7.2.5|^8.0",
         "fideloper/proxy": "^4.4",
@@ -21,7 +29,8 @@
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^4.3",
-        "phpunit/phpunit": "^8.5.8|^9.3.3"
+        "phpunit/phpunit": "^8.5.8|^9.3.3",
+        "squizlabs/php_codesniffer": "*"
     },
     "config": {
         "optimize-autoloader": true,
@@ -59,6 +68,15 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-install-cmd": [
+            "bash git-hook-setup/setup.sh"
+        ],
+        "post-update-cmd": [
+            "bash git-hook-setup/setup.sh"
+        ],
+        "test": [
+            "./vendor/bin/phpunit --colors=always"
         ]
     }
 }
