@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Post;
+use App\Repositories\Eloquent\PostRepository;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer('layouts.app', function ($view) {
+            $view->with('recentPosts', (new PostRepository(new Post()))->getRecentPosts());
+        });
     }
 }

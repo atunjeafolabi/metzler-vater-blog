@@ -7,74 +7,107 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield("title")</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/css/vendor/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/css/vendor/animate.css">
+    <link rel="stylesheet" href="/css/vendor/aos.css">
+    <link rel="stylesheet" href="/css/vendor/ionicons.min.css">
+    <link rel="stylesheet" href="/css/vendor/icomoon.css">
+    <link rel="stylesheet" href="/css/vendor/style.css">
+    <link href="/css/custom.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+        <loader></loader>
+    </div>
+    <main>
+        <div id="colorlib-page">
+            <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+            <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+                <nav id="colorlib-main-menu" role="navigation">
+                    <h4 class="border-bottom">Metzler Vater Blog</h4>
+                    <ul class="mt-5">
+                        <li class="colorlib-active"><a href="{{route('index')}}">Posts</a></li>
+                        <li><a href="{{route('create-form')}}">Add New Post</a></li>
                     </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
+                </nav>
+            </aside>
+            <div id="colorlib-main">
+                <section class="ftco-section ftco-no-pt ftco-no-pb">
+                    <div class="container">
+                        <div class="row d-flex">
+                            @yield('content')
+                            <div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
+                                <div class="sidebar-box pt-md-4">
+                                    <form action="#" class="search-form">
+                                        <div class="form-group">
+                                            <span class="icon icon-search"></span>
+                                            <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                                        </div>
                                     </form>
                                 </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                                <div class="sidebar-box ftco-animate">
+                                    <h3 class="sidebar-heading">Categories</h3>
+                                    <ul class="categories">
+                                        <li><a href="#">Fashion <span>(6)</span></a></li>
+                                        <li><a href="#">Technology <span>(8)</span></a></li>
+                                        <li><a href="#">Travel <span>(2)</span></a></li>
+                                        <li><a href="#">Food <span>(2)</span></a></li>
+                                        <li><a href="#">Photography <span>(7)</span></a></li>
+                                    </ul>
+                                </div>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+                                <div class="sidebar-box ftco-animate">
+                                    <h3 class="sidebar-heading">Recent Posts</h3>
+                                    @foreach($recentPosts as $post)
+                                        <div class="block-21 mb-4 d-flex">
+                                            <a href="{{route('post', ['slug' => $post->slug])}}" class="blog-img mr-4" style="background-image: url(/{{$post->image_path}});"></a>
+                                            <div class="text">
+                                                <h3 class="heading"><a href="{{route('post', ['slug' => $post->slug])}}">{{$post->title}}</a></h3>
+                                                <div class="meta">
+                                                    <div><span class="icon-calendar"></span> {{$post->created_at}}</div>
+                                                    <div><a href="#"><span class="icon-person"></span>{{$post->creator->name}}</a></div>
+                                                    <div>
+                                                        <a href="#">
+                                                            <span class="icon-chat"></span>&nbsp;{{$post->comments->count()}}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="sidebar-box ftco-animate">
+                                    <h3 class="sidebar-heading">Tags</h3>
+                                    <ul class="tagcloud">
+                                        <a href="#" class="tag-cloud-link">animals</a>
+                                        <a href="#" class="tag-cloud-link">human</a>
+                                        <a href="#" class="tag-cloud-link">people</a>
+                                        <a href="#" class="tag-cloud-link">cat</a>
+                                        <a href="#" class="tag-cloud-link">dog</a>
+                                        <a href="#" class="tag-cloud-link">nature</a>
+                                        <a href="#" class="tag-cloud-link">leaves</a>
+                                        <a href="#" class="tag-cloud-link">food</a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/vendor/jquery.min.js"></script>
+    <script src="/js/vendor/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/js/vendor/jquery.waypoints.min.js"></script>
+    <script src="/js/vendor/jquery.stellar.min.js"></script>
+{{--    <script src="js/vendor/aos.js"></script>--}}
+    <script src="/js/vendor/main.js"></script>
 </body>
 </html>
