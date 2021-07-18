@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Repositories\Contracts\PostRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -47,6 +49,10 @@ class PostController extends Controller
     {
         $post = $this->postRepository->findbySlug($slug);
 
+        if (!$post) {
+            abort(404, 'Post does not exist');
+        }
+
         return view("posts.show", ['post' => $post]);
     }
 
@@ -59,26 +65,13 @@ class PostController extends Controller
 
     public function create(CreatePostRequest $request)
     {
-        $postDetails               = $request->validated();
+        $postData               = $request->validated();
         $imageName                 = $this->saveImage($request);
-        $postDetails["image_path"] = $imageName;
+        $postData["image_path"] = $imageName;
 
-        $isPostCreated = $this->postRepository->create($postDetails);
+        $isPostCreated = $this->postRepository->create($postData);
 
         return redirect()->back()->with(["message" => "Post created"]);
-    }
-
-    /**
-     * @param   CreatePostRequest  $request
-     *
-     * @return array|false|string
-     */
-    private function saveImage(CreatePostRequest $request)
-    {
-        $imageName = $request->file('post_image')->store('public/post-image');
-        $imageName = substr($imageName, strlen('public/'));
-
-        return $imageName;
     }
 
     public function recentPosts()
@@ -88,11 +81,55 @@ class PostController extends Controller
         return $recentPosts;
     }
 
-    public function update($id)
+    public function showUpdateForm($slug)
     {
+        $post = $this->postRepository->findbySlug($slug);
+
+        if (!$post) {
+            abort(404, 'Post does not exist');
+        }
+
+        $categories = $this->categoryRepository->findAll();
+
+        return view('posts.form.update', [
+            "post" => $post,
+            "categories" => $categories
+        ]);
     }
 
-    public function delete($id)
+    public function update($slug, UpdatePostRequest $request)
     {
+        $postData = $request->except('_method', '_token', 'post_image');
+
+        if ($request->hasFile('post_image')) {
+            $imageName                 = $this->saveImage($request);
+            $postData["image_path"] = $imageName;
+        }
+
+        $isUpdated = $this->postRepository->update($slug, $postData);
+
+        if (!$isUpdated) {
+            return redirect()->back();
+        }
+
+        return redirect()->route('post', ['slug' => $slug]);
+    }
+
+    /**
+     * @param   FormRequest  $request
+     *
+     * @return array|false|string
+     */
+    private function saveImage(FormRequest $request)
+    {
+        $imageName = $request->file('post_image')->store('public/post-image');
+        $imageName = substr($imageName, strlen('public/'));
+
+        return $imageName;
+    }
+
+    public function delete($slug)
+    {
+        dd($this->postRepository->delete($slug));
     }
 }

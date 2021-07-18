@@ -2,19 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="705778af-bfb7-4569-8d5f-5dc62283ec94" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.testing" beforeDir="false" afterPath="$PROJECT_DIR$/.env.testing" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_07_16_191706_create_posts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_07_16_191706_create_posts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_07_16_191903_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_07_16_191705_create_categories_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_07_17_112331_add_description_to_users_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_07_17_211317_add_category_id_to_posts_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/posts/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/posts/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Contracts/RepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Contracts/RepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Repository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Repository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/CommentSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/CommentSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/PostSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/PostSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/posts/form/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/posts/form/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/posts/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/posts/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -179,7 +176,7 @@
     <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/posts/form" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
@@ -190,6 +187,7 @@
       <recent name="$PROJECT_DIR$/public/storage" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/posts/form" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/tests/Unit" />
       <recent name="$PROJECT_DIR$/resources/views/layouts" />
@@ -224,7 +222,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1626460018043</updated>
-      <workItem from="1626460019135" duration="83419000" />
+      <workItem from="1626460019135" duration="96050000" />
     </task>
     <servers />
   </component>

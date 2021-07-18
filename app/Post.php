@@ -19,11 +19,6 @@ class Post extends Model
         });
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');

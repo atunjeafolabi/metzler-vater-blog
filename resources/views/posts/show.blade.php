@@ -6,8 +6,18 @@
     <div class="col-lg-8 px-md-5 py-5">
         <div class="row pt-md-4">
             <div class="col-lg-12">
-                <h1>{{$post->title}}</h1>
-                <div class="mt-3 mb-5">
+                <h2>
+                    {{$post->title}}
+                    <form method="POST" action="{{ route('delete-post', ['slug' => $post->slug]) }}" onclick="return confirm('Are you sure you want to delete this Post?')" style="display: inline-block; float: right">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-icon">
+                            Delete
+                        </button>
+                    </form>
+                    <a href="{{route('update-form', ['slug' => $post->slug])}}" class="btn btn-info float-right mt-2 mr-1">Edit</a>
+                </h2>
+                <div class="my-5 mb-5">
                     <img src="{{env('FILE_PUBLIC_PATH').$post->image_path}}" alt="Post Image" class="post-image">
                 </div>
                 <p>{{$post->body}}</p>

@@ -47,18 +47,22 @@ abstract class Repository implements RepositoryInterface
         return $posts;
     }
 
-    public function update(array $data, $id): void
+    public function update($slug, array $data)
     {
-        // TODO: Implement update() method.
+        $isUpdated = $this->model->where('slug', $slug)->update($data);
+
+        return $isUpdated;
     }
 
-    public function delete($id): void
+    public function delete($slug)
     {
-        // TODO: Implement delete() method.
+        $post = $this->model->where(['slug' => $slug])->first();
+
+        return $post->delete();
     }
 
     public function findBy($attribute, $value): ?Model
     {
-        // TODO: Implement findBy() method.
+//        $this->find
     }
 }
