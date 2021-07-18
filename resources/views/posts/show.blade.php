@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <h1>{{$post->title}}</h1>
                 <div class="mt-3 mb-5">
-                    <img src="{{env('FILE_STORAGE').$post->image_path}}" alt="Post Image" class="post-image">
+                    <img src="{{env('FILE_PUBLIC_PATH').$post->image_path}}" alt="Post Image" class="post-image">
                 </div>
                 <p>{{$post->body}}</p>
             </div>
@@ -19,7 +19,7 @@
             </div>
             <div class="col-lg-12 about-author d-flex p-4 bg-light">
                 <div class="bio mr-5">
-                    <img src="{{env('FILE_STORAGE').$post->creator->avatar}}" alt="Avatar" class="avatar mb-4">
+                    <img src="{{env('FILE_PUBLIC_PATH').$post->creator->avatar}}" alt="Avatar" class="avatar mb-4">
                 </div>
                 <div class="desc">
                     <h3>{{$post->creator->name}}</h3>
@@ -36,7 +36,7 @@
                     @foreach($post->comments as $comment)
                         <li class="comment">
                             <div class="vcard bio">
-                                <img src="{{env('FILE_STORAGE').$comment->creator->avatar}}" alt="Image placeholder">
+                                <img src="{{env('FILE_PUBLIC_PATH').$comment->creator->avatar}}" alt="Image placeholder">
                             </div>
                             <div class="comment-body">
                                 <h3>{{$comment->creator->name}}</h3>
@@ -50,7 +50,7 @@
                                 @foreach($comment->replies as $reply)
                                     <li class="comment">
                                         <div class="vcard bio">
-                                            <img src="{{env('FILE_STORAGE').$reply->creator->avatar}}" alt="Image placeholder">
+                                            <img src="{{env('FILE_PUBLIC_PATH').$reply->creator->avatar}}" alt="Image placeholder">
                                         </div>
                                         <div class="comment-body">
                                             <h3>{{$reply->creator->name}}</h3>

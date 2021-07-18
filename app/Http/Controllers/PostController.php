@@ -76,7 +76,7 @@ class PostController extends Controller
     private function saveImage(CreatePostRequest $request)
     {
         $imageName = $request->file('post_image')->store('public/post-image');
-        $imageName = substr($imageName, 7);
+        $imageName = substr($imageName, strlen('public/'));
 
         return $imageName;
     }

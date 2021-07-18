@@ -64,7 +64,7 @@
                                     <h3 class="sidebar-heading">Recent Posts</h3>
                                     @foreach($recentPosts as $post)
                                         <div class="block-21 mb-4 d-flex">
-                                            <a href="{{route('post', ['slug' => $post->slug])}}" class="blog-img mr-4" style="background-image: url({{env('FILE_STORAGE').$post->image_path}});"></a>
+                                            <a href="{{route('post', ['slug' => $post->slug])}}" class="blog-img mr-4" style="background-image: url({{env('FILE_PUBLIC_PATH').$post->image_path}});"></a>
                                             <div class="text">
                                                 <h3 class="heading"><a href="{{route('post', ['slug' => $post->slug])}}">{{$post->title}}</a></h3>
                                                 <div class="meta">
