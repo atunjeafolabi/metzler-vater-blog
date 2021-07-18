@@ -25,6 +25,14 @@
                 <input type="text" name="title" class="form-control" placeholder="Post title" value="{{old('title')}}">
             </div>
             <div class="form-group">
+                <select name="category_id" class="form-control">
+                    <option value="">Select category</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <textarea name="body" id="" cols="30" rows="7" class="form-control" placeholder="Content">{{old('body')}}</textarea>
             </div>
             <div class="form-group">

@@ -28,7 +28,8 @@ class CreatePostRequest extends FormRequest
         return [
             'title' => 'required|string',
             'body' => 'required|string',
-            'post_image' => 'required|image'
+            'post_image' => 'required|image',
+            'category_id' => 'required|numeric'
         ];
     }
 }

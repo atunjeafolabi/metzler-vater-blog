@@ -4,22 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
 use App\Repositories\Contracts\PostRepositoryInterface;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     private $postRepository;
+    private $categoryRepository;
 
-    public function __construct(PostRepositoryInterface $postRepository)
-    {
+    public function __construct(
+        PostRepositoryInterface $postRepository,
+        CategoryRepositoryInterface $categoryRepository
+    ) {
         $this->postRepository = $postRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts = $this->postRepository->paginate();
+        $queryString = $request->query();
+
+        if (!$this->isPaginationQueryString($queryString)) {
+            $posts = $this->postRepository->findWhere($queryString);
+        } else {
+            $posts = $this->postRepository->paginate();
+        }
 
         return view("posts.index", ["posts" => $posts]);
+    }
+
+    /**
+     * @param   array  $queryString
+     *
+     * @return bool
+     */
+    private function isPaginationQueryString(array $queryString)
+    {
+        return $queryString && isset($queryString['page']);
     }
 
     public function show($slug)
@@ -31,16 +52,33 @@ class PostController extends Controller
 
     public function showCreateForm()
     {
-        return view('posts.form.create');
+        $categories = $this->categoryRepository->findAll();
+
+        return view('posts.form.create', ["categories" => $categories]);
     }
 
     public function create(CreatePostRequest $request)
     {
-        $postDetails = $request->validated();
+        $postDetails               = $request->validated();
+        $imageName                 = $this->saveImage($request);
+        $postDetails["image_path"] = $imageName;
 
         $isPostCreated = $this->postRepository->create($postDetails);
 
         return redirect()->back()->with(["message" => "Post created"]);
+    }
+
+    /**
+     * @param   CreatePostRequest  $request
+     *
+     * @return array|false|string
+     */
+    private function saveImage(CreatePostRequest $request)
+    {
+        $imageName = $request->file('post_image')->store('public/post-image');
+        $imageName = substr($imageName, 7);
+
+        return $imageName;
     }
 
     public function recentPosts()

@@ -12,6 +12,7 @@ interface RepositoryInterface
     public function findAll() : ?Collection;
     public function findBy($attribute, $value) : ?Model;
     public function paginate($perPage) : LengthAwarePaginator;
+    public function findWhere($query) : LengthAwarePaginator;
     public function update(array $data, $id) : void;
     public function delete($id) : void;
 }

@@ -8,21 +8,18 @@
             <div class="col-lg-12">
                 <h1>{{$post->title}}</h1>
                 <div class="mt-3 mb-5">
-                    <img src="/{{$post->image_path}}" alt="Image placeholder" class="post-image">
+                    <img src="{{env('FILE_STORAGE').$post->image_path}}" alt="Post Image" class="post-image">
                 </div>
                 <p>{{$post->body}}</p>
             </div>
             <div class="col-lg-12 tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
-                    <a href="#" class="tag-cloud-link">Life</a>
-                    <a href="#" class="tag-cloud-link">Sport</a>
-                    <a href="#" class="tag-cloud-link">Tech</a>
-                    <a href="#" class="tag-cloud-link">Travel</a>
+                    Category: <a href="{{route('index', ['category_id' => $post->category_id])}}" class="tag-cloud-link">{{$post->category->name}}</a>
                 </div>
             </div>
             <div class="col-lg-12 about-author d-flex p-4 bg-light">
                 <div class="bio mr-5">
-                    <img src="/{{$post->creator->avatar}}" alt="Image placeholder" class="avatar mb-4">
+                    <img src="{{env('FILE_STORAGE').$post->creator->avatar}}" alt="Avatar" class="avatar mb-4">
                 </div>
                 <div class="desc">
                     <h3>{{$post->creator->name}}</h3>
@@ -39,7 +36,7 @@
                     @foreach($post->comments as $comment)
                         <li class="comment">
                             <div class="vcard bio">
-                                <img src="/{{$comment->creator->avatar}}" alt="Image placeholder">
+                                <img src="{{env('FILE_STORAGE').$comment->creator->avatar}}" alt="Image placeholder">
                             </div>
                             <div class="comment-body">
                                 <h3>{{$comment->creator->name}}</h3>
@@ -53,7 +50,7 @@
                                 @foreach($comment->replies as $reply)
                                     <li class="comment">
                                         <div class="vcard bio">
-                                            <img src="/{{$reply->creator->avatar}}" alt="Image placeholder">
+                                            <img src="{{env('FILE_STORAGE').$reply->creator->avatar}}" alt="Image placeholder">
                                         </div>
                                         <div class="comment-body">
                                             <h3>{{$reply->creator->name}}</h3>
