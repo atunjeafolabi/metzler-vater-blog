@@ -31,9 +31,34 @@
             <aside id="colorlib-aside" role="complementary" class="js-fullheight">
                 <nav id="colorlib-main-menu" role="navigation">
                     <h4 class="border-bottom">Metzler Vater Blog</h4>
-                    <ul class="mt-5">
+                    <ul class="mt-4">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li>
+                                <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                                @if (Route::has('register'))
+                                    | <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                                @endif
+                            </li>
+                        @else
+                            <span>Welcome, {{ Auth::user()->name }}</span>
+
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        @endguest
+                    </ul>
+                    <ul class="mt-3">
                         <li class="colorlib-active"><a href="{{route('index')}}">Posts</a></li>
-                        <li><a href="{{route('create-form')}}">Add New Post</a></li>
+                        @auth
+                            <li><a href="{{route('create-form')}}">Add New Post</a></li>
+                        @endauth
                     </ul>
                 </nav>
             </aside>

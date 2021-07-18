@@ -74,19 +74,12 @@ class PostController extends Controller
         return redirect()->back()->with(["message" => "Post created"]);
     }
 
-    public function recentPosts()
-    {
-        $recentPosts = $this->postRepository->getRecentPosts();
-
-        return $recentPosts;
-    }
-
     public function showUpdateForm($slug)
     {
         $post = $this->postRepository->findbySlug($slug);
 
         if (!$post) {
-            abort(404, 'Post does not exist');
+            abort(404, 'The Post you want to edit does not exist');
         }
 
         $categories = $this->categoryRepository->findAll();
@@ -130,6 +123,12 @@ class PostController extends Controller
 
     public function delete($slug)
     {
-        dd($this->postRepository->delete($slug));
+        $isDeleted = $this->postRepository->delete($slug);
+
+        if (!$isDeleted) {
+            return redirect()->back();
+        }
+
+        return redirect()->route('index');
     }
 }

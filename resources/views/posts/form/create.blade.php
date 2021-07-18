@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-lg-8">
-        <form action="{{route('update-post')}}" class="bg-light p-5 contact-form" method="POST" enctype="multipart/form-data">
+        <form action="{{route('create-post')}}" class="bg-light p-5 contact-form" method="POST" enctype="multipart/form-data">
             {{csrf_field()}}
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -20,7 +20,7 @@
                     <strong>{{session()->get('message')}}</strong>
                 </div>
             @endif
-            <h3 class="pb-5">Update Post</h3>
+            <h3 class="pb-5">Add New Post</h3>
             <div class="form-group">
                 <input type="text" name="title" class="form-control" placeholder="Post title" value="{{old('title')}}">
             </div>
@@ -28,7 +28,7 @@
                 <select name="category_id" class="form-control">
                     <option value="">Select category</option>
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        <option value="{{$category->id}}" {{(old('category_id') == $category->id) ? 'selected' : ''}}>{{$category->name}}</option>
                     @endforeach
                 </select>
             </div>
