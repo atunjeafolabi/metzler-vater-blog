@@ -2,16 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="705778af-bfb7-4569-8d5f-5dc62283ec94" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env.testing" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/metzler-vater-blog.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/metzler-vater-blog.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/PostFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/PostFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/PostSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/PostSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/posts/form/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/posts/form/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/posts/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/posts/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/posts/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/posts/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/avatar/2669e6fc003d823113ce4818e95ec793.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/avatar/452e65b3dbc811fe50e891a3916ba07b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/avatar/578f572a3b15606d6dc19fa65a91a19a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/avatar/5c35b6b8bfb37405fdc32fc9d966d3f9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/avatar/65142185be6f2f6af3e8948531171da7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/avatar/de271897c1d5a7543b0e9563d45abee2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/avatar/ff4e7df2521fb0ef1c9fc37b2cea6b86.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/post-image/25c46f78135aa520250fd0b461f207d3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/post-image/2b62612d15fe9071c40224c27919e130.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/post-image/4122aabb45ae7979cc07ddb45fc8b40a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/post-image/5fe182586d637c4b519163a1606b82a5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/post-image/840f420e14fe2e87d7cc9e05caadca7f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/post-image/aeb536927358bad896ca8134f358c48a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/post-image/d0516d91c03c858c687ff2f530280f0f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/post-image/e22b13484285a235c39e2528acaf1df4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fixtures/post-image/e33e23d78959a6427563a75648f42aec.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -166,6 +186,8 @@
       <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/vendor/squizlabs/php_codesniffer" />
+      <path value="$PROJECT_DIR$/vendor/php-webdriver/webdriver" />
+      <path value="$PROJECT_DIR$/vendor/laravel/dusk" />
     </include_path>
   </component>
   <component name="ProjectId" id="1vPNyYGfwQzuwdeIwb2PVnPX4c7" />
@@ -176,10 +198,10 @@
     <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/posts/form" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -187,8 +209,8 @@
       <recent name="$PROJECT_DIR$/public/storage" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/posts/form" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/resources/views/posts/form" />
       <recent name="$PROJECT_DIR$/tests/Unit" />
       <recent name="$PROJECT_DIR$/resources/views/layouts" />
       <recent name="$PROJECT_DIR$/resources/views/posts" />
@@ -222,7 +244,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1626460018043</updated>
-      <workItem from="1626460019135" duration="103400000" />
+      <workItem from="1626460019135" duration="150130000" />
     </task>
     <servers />
   </component>

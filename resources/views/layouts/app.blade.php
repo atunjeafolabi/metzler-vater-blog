@@ -44,6 +44,7 @@
                             <span>Welcome, {{ Auth::user()->name }}</span>
 
                             <a href="{{ route('logout') }}"
+                               id="logout-link"
                                onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -57,7 +58,7 @@
                     <ul class="mt-3">
                         <li class="colorlib-active"><a href="{{route('index')}}">Posts</a></li>
                         @auth
-                            <li><a href="{{route('create-form')}}">Add New Post</a></li>
+                            <li><a href="{{route('create-form')}}" class="add-new-post">Add New Post</a></li>
                         @endauth
                     </ul>
                 </nav>
@@ -89,7 +90,7 @@
                                     <h3 class="sidebar-heading">Recent Posts</h3>
                                     @foreach($recentPosts as $post)
                                         <div class="block-21 mb-4 d-flex">
-                                            <a href="{{route('post', ['slug' => $post->slug])}}" class="blog-img mr-4" style="background-image: url({{env('FILE_PUBLIC_PATH').$post->image_path}});"></a>
+                                            <a href="{{route('post', ['slug' => $post->slug])}}" class="blog-img mr-4" style="background-image: url({{env('POST_IMAGE_PUBLIC_PATH').$post->image_path}});"></a>
                                             <div class="text">
                                                 <h3 class="heading"><a href="{{route('post', ['slug' => $post->slug])}}">{{$post->title}}</a></h3>
                                                 <div class="meta">

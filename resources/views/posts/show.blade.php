@@ -9,18 +9,18 @@
                 <h2>
                     {{$post->title}}
                     @auth
-                        <form method="POST" action="{{ route('delete-post', ['slug' => $post->slug]) }}" onclick="return confirm('Are you sure you want to delete this Post?')" style="display: inline-block; float: right">
+                        <form method="POST" class="delete-form" action="{{ route('delete-post', ['slug' => $post->slug]) }}" onclick="return confirm('Are you sure you want to delete this Post?')" style="display: inline-block; float: right">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-icon">
                                 Delete
                             </button>
                         </form>
-                        <a href="{{route('update-form', ['slug' => $post->slug])}}" class="btn btn-info float-right mt-2 mr-1">Edit</a>
+                        <a href="{{route('update-form', ['slug' => $post->slug])}}" class="btn btn-info edit-btn float-right mt-2 mr-1">Edit</a>
                     @endauth
                 </h2>
                 <div class="my-5 mb-5">
-                    <img src="{{env('FILE_PUBLIC_PATH').$post->image_path}}" alt="Post Image" class="post-image">
+                    <img src="{{env('POST_IMAGE_PUBLIC_PATH').$post->image_path}}" alt="Post Image" class="post-image">
                 </div>
                 <p>{{$post->body}}</p>
             </div>
@@ -31,7 +31,7 @@
             </div>
             <div class="col-lg-12 about-author d-flex p-4 bg-light">
                 <div class="bio mr-5">
-                    <img src="{{env('FILE_PUBLIC_PATH').$post->creator->avatar}}" alt="Avatar" class="avatar mb-4">
+                    <img src="{{env('AVATAR_PUBLIC_PATH').$post->creator->avatar}}" alt="Avatar" class="avatar mb-4">
                 </div>
                 <div class="desc">
                     <h3>{{$post->creator->name}}</h3>
@@ -48,7 +48,7 @@
                     @foreach($post->comments as $comment)
                         <li class="comment">
                             <div class="vcard bio">
-                                <img src="{{env('FILE_PUBLIC_PATH').$comment->creator->avatar}}" alt="Image placeholder">
+                                <img src="{{env('AVATAR_PUBLIC_PATH').$comment->creator->avatar}}" alt="Image placeholder">
                             </div>
                             <div class="comment-body">
                                 <h3>{{$comment->creator->name}}</h3>
@@ -62,7 +62,7 @@
                                 @foreach($comment->replies as $reply)
                                     <li class="comment">
                                         <div class="vcard bio">
-                                            <img src="{{env('FILE_PUBLIC_PATH').$reply->creator->avatar}}" alt="Image placeholder">
+                                            <img src="{{env('AVATAR_PUBLIC_PATH').$reply->creator->avatar}}" alt="Avatar">
                                         </div>
                                         <div class="comment-body">
                                             <h3>{{$reply->creator->name}}</h3>

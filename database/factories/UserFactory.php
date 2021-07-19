@@ -18,9 +18,12 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
-    $avatarPath = substr(
-        $faker->image(env('FILE_STORAGE_PATH') . 'avatar', $width = 640, $height = 480),
-        strlen(env('FILE_STORAGE_PATH'))
+    $avatarFile =  $faker->image(
+        env('FILE_STORAGE_PATH') . 'avatar',
+        $width = 490,
+        $height = 490,
+        null,
+        false
     );
 
     return [
@@ -30,7 +33,7 @@ $factory->define(User::class, function (Faker $faker) {
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
 //        'remember_token' => Str::random(10),
 //        'is_admin' => ,
-        'avatar' => $avatarPath,
+        'avatar' => $avatarFile,
         'description' => $faker->sentence
     ];
 });

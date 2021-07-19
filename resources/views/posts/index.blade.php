@@ -8,7 +8,7 @@
             @foreach($posts as $post)
                 <div class="col-md-12">
                     <div class="blog-entry ftco-animate d-md-flex">
-                        <a href="{{route('post', ['slug' => $post->slug])}}" class="img img-2" style="background-image: url({{env('FILE_PUBLIC_PATH').$post->image_path}});"></a>
+                        <a href="{{route('post', ['slug' => $post->slug])}}" class="img img-2" style="background-image: url({{env('POST_IMAGE_PUBLIC_PATH').$post->image_path}});"></a>
                         <div class="text text-2 pl-md-4">
                             <h3 class="mb-2"><a href="{{route('post', ['slug' => $post->slug])}}">{{$post->title}}</a></h3>
                             <div class="meta-wrap">
