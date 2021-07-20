@@ -72,21 +72,18 @@ Visit the local homepage at `localhost:8000`
 ![All Posts](screenshots/all-posts.png)
 
 ##### View one post
-![View one post](screenshots/all-posts.png)
+![View one post](screenshots/view-one-post.png)
 
 ##### Add Post
-![Add Posts](screenshots/add-post.png)
+![Add Post](screenshots/add-post.png)
 
-![Add Posts](screenshots/add-post-validation.png)
-
-##### View one post
-![View one Post](screenshots/view-one-post.png)
-
-##### View all posts
-![View all Posts](screenshots/view-all-posts.png)
+![Add Post with validation](screenshots/add-post-validation.png)
 
 ##### Add user (Admin)
 ![Add User](screenshots/admin-add-user.png)
+
+##### View all users (Admin)
+![View all users](screenshots/admin-view-all-users.png)
 
 ##### View user (Admin)
 ![View User](screenshots/admin-view-user.png)
