@@ -55,9 +55,13 @@ class UserController extends Controller
         return redirect()->back()->with(["message" => "User created"]);
     }
 
-    public function showUpdateForm($id)
+    public function showUpdateForm($id, Request $request)
     {
         $user = $this->userRepository->findbyId($id);
+
+        if ($request->user()->cant('update', $user)) {
+            abort('403', 'You cannot edit other users');
+        }
 
         if (!$user) {
             abort(404, 'The User you want to edit does not exist');
@@ -71,6 +75,11 @@ class UserController extends Controller
     public function update($id, UpdateUserRequest $request)
     {
         $userData = $request->except('_method', '_token', 'avatar');
+
+        $user = $this->userRepository->findById($id);
+        if ($request->user()->cant('update', $user)) {
+            abort('403', 'You cannot edit other users');
+        }
 
         if ($request->hasFile('avatar')) {
             $imageName                 = $this->saveImage($request, 'avatar', env('AVATAR_STORAGE_PATH'));

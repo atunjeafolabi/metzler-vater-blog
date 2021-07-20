@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section("title", "Edit Post")
+
 @section('content')
     <div class="col-lg-8">
         <form action="{{route('update-user', ['id' => $user->id])}}" class="bg-light p-5 contact-form" method="POST" enctype="multipart/form-data">
@@ -23,7 +25,7 @@
             @endif
             <h1 class="pb-3">Edit User</h1>
             <div class="mb-5">
-                <img src="{{env('AVATAR_PUBLIC_PATH').$user->avatar}}" alt="user Image" class="user-image">
+                <img src="{{env('AVATAR_PUBLIC_PATH').$user->avatar}}" alt="User Image" class="image-contain">
             </div>
             <div class="form-group">
                 <input type="text" name="name" class="form-control" placeholder="Enter Name" value="{{old('name', $user->name)}}">

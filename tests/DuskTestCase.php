@@ -5,6 +5,7 @@ namespace Tests;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Laravel\Dusk\Browser;
 use Laravel\Dusk\TestCase as BaseTestCase;
 
 abstract class DuskTestCase extends BaseTestCase
@@ -58,5 +59,18 @@ abstract class DuskTestCase extends BaseTestCase
     {
         return isset($_SERVER['DUSK_HEADLESS_DISABLED']) ||
                isset($_ENV['DUSK_HEADLESS_DISABLED']);
+    }
+
+
+    public function tearDown(): void
+    {
+        /*
+         * Clear all cookies after each test to avoid authentication issues
+         */
+        $this->browse(function (Browser $browser) {
+            $browser->driver->manage()->deleteAllCookies();
+        });
+
+        parent::tearDown();
     }
 }

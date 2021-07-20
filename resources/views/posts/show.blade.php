@@ -9,18 +9,22 @@
                 <h2>
                     {{$post->title}}
                     @auth
-                        <form method="POST" class="delete-form" action="{{ route('delete-post', ['slug' => $post->slug]) }}" onclick="return confirm('Are you sure you want to delete this Post?')" style="display: inline-block; float: right">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-icon">
-                                Delete
-                            </button>
-                        </form>
-                        <a href="{{route('update-form', ['slug' => $post->slug])}}" class="btn btn-info edit-btn float-right mt-2 mr-1">Edit</a>
+                        @can('delete', $post)
+                            <form method="POST" class="delete-form" action="{{ route('delete-post', ['slug' => $post->slug]) }}" onclick="return confirm('Are you sure you want to delete this Post?')" style="display: inline-block; float: right">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-icon">
+                                    Delete
+                                </button>
+                            </form>
+                        @endcan
+                        @can('update', $post)
+                            <a href="{{route('update-post-form', ['slug' => $post->slug])}}" class="btn btn-info edit-btn float-right mt-2 mr-1">Edit</a>
+                        @endcan
                     @endauth
                 </h2>
                 <div class="my-5 mb-5">
-                    <img src="{{env('POST_IMAGE_PUBLIC_PATH').$post->image_path}}" alt="Post Image" class="post-image">
+                    <img src="{{env('POST_IMAGE_PUBLIC_PATH').$post->image_path}}" alt="Post Image" class="image-contain">
                 </div>
                 <p>{{$post->body}}</p>
             </div>

@@ -16,7 +16,17 @@
                             <h3 class="mb-2"><a href="{{route('post', ['slug' => $post->slug])}}">{{$post->title}}</a></h3>
                             <div class="meta-wrap">
                                 <p class="meta">
-                                    <span><i class="icon-calendar mr-2"></i>{{$post->created_at}}</span>
+
+                                    <span>
+                                        Created on:&nbsp;
+                                        <i class="icon-calendar mr-2"></i>
+                                        {{$post->created_at}}
+                                    </span>
+                                    <span>
+                                        <i class="icon-user mr-2"></i>
+                                        Created by:&nbsp;
+                                        <a href="{{route('user', ['id' => $post->created_by])}}">{{$post->creator->name}}</a>
+                                    </span>
                                     <span><a href="{{route('index', ['category_id' => $post->category->id])}}"><i class="icon-folder-o mr-2"></i>{{$post->category->name}}</a></span>
                                     <span>
                                         <i class="icon-comment2 mr-2"></i>

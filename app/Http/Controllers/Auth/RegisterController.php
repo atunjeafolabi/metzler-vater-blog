@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,15 +31,20 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+    /**
+     * @var Request
+     */
+    private $request;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->middleware('guest');
+        $this->request = $request;
     }
 
     /**
@@ -53,7 +59,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'description' => ['required', 'string']
+            'description' => ['required', 'string'],
+            'avatar' => ['required', 'image']
         ]);
     }
 
@@ -65,12 +72,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $avatarFileName = $this->saveImage(
+            $this->request,
+            'avatar',
+            env('AVATAR_STORAGE_PATH')
+        );
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'description' => $data['description'],
-            'avatar' => 'no-image.jpeg'
+            'avatar' => $avatarFileName
         ]);
     }
 }

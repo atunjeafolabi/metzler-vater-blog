@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Repositories\Contracts\PostRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -65,6 +66,7 @@ class PostController extends Controller
     public function create(CreatePostRequest $request)
     {
         $postData               = $request->validated();
+        $postData['created_by'] = Auth::id();
         $imageName              = $this->saveImage($request, 'post-image', env('POST_IMAGE_STORAGE_PATH'));
         $postData["image_path"] = $imageName;
 
@@ -73,9 +75,13 @@ class PostController extends Controller
         return redirect()->back()->with(["message" => "Post created"]);
     }
 
-    public function showUpdateForm($slug)
+    public function showUpdateForm($slug, Request $request)
     {
         $post = $this->postRepository->findbySlug($slug);
+
+        if ($request->user()->cant('update', $post)) {
+            abort(403, 'You can only edit posts created by you.');
+        }
 
         if (!$post) {
             abort(404, 'The Post you want to edit does not exist');
@@ -91,6 +97,12 @@ class PostController extends Controller
 
     public function update($slug, UpdatePostRequest $request)
     {
+        $post = $this->postRepository->findBySlug($slug);
+
+        if ($request->user()->cant('update', $post)) {
+            abort(403, 'You can only edit posts created by you.');
+        }
+
         $postData = $request->except('_method', '_token', 'post-image');
 
         if ($request->hasFile('post-image')) {
@@ -107,8 +119,14 @@ class PostController extends Controller
         return redirect()->route('post', ['slug' => $slug]);
     }
 
-    public function delete($slug)
+    public function delete($slug, Request $request)
     {
+        $post = $this->postRepository->findBySlug($slug);
+
+        if ($request->user()->cant('delete', $post)) {
+            abort(403, 'You can only delete posts created by you.');
+        }
+
         $isDeleted = $this->postRepository->delete($slug);
 
         if (!$isDeleted) {

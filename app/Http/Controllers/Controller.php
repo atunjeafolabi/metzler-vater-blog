@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -20,7 +21,7 @@ class Controller extends BaseController
      *
      * @return array|false|string
      */
-    protected function saveImage(FormRequest $request, $fileInputField, $storagePath)
+    protected function saveImage(Request $request, $fileInputField, $storagePath)
     {
         $imageFullPath = $request->file($fileInputField)->store($storagePath);
 

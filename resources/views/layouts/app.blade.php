@@ -9,8 +9,8 @@
 
     <title>@yield("title")</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+{{--    <!-- Scripts -->--}}
+{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
 
     <!-- Styles -->
     <link rel="stylesheet" href="/css/vendor/open-iconic-bootstrap.min.css">
@@ -22,8 +22,8 @@
     <link href="/css/custom.css" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <loader></loader>
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg>
     </div>
     <main>
         <div id="colorlib-page">
@@ -41,7 +41,14 @@
                                 @endif
                             </li>
                         @else
-                            <span>Welcome, {{ Auth::user()->name }}</span>
+                            <span>
+                                <img src="{{ env('AVATAR_PUBLIC_PATH') . Auth::user()->avatar }}" alt="Avatar" class="avatar-tiny">
+                                Welcome,
+                                <a href="{{route('user', ['id' => Auth::user()->id])}}" class="text-dark">
+                                    {{ Auth::user()->name }}
+                                    {{Auth::user()->isAdmin() ? '(Admin)' : ''}} |
+                                </a>
+                            </span>
 
                             <a href="{{ route('logout') }}"
                                id="logout-link"
@@ -58,11 +65,13 @@
                     <ul class="mt-3">
                         <li class="border-top border-bottom"><strong>Posts</strong></li>
                         <li class="colorlib-active"><a href="{{route('index')}}">All</a></li>
-                        @auth
-                            <li><a href="{{route('create-form')}}" class="add-new-post">Add</a></li>
-                            <li class="border-top border-bottom"><strong>Users</strong></li>
-                            <li><a href="{{route('users')}}" class="users">All</a></li>
-                            <li><a href="{{route('create-user-form')}}">Add</a></li>
+                        @auth()
+                            <li><a href="{{route('create-post-form')}}" class="add-new-post">Add</a></li>
+                            @if(auth()->user()->isAdmin())
+                                <li class="border-top border-bottom"><strong>Users</strong></li>
+                                <li><a href="{{route('users')}}" class="users">All</a></li>
+                                <li><a href="{{route('create-user-form')}}">Add</a></li>
+                            @endif
                         @endauth
                     </ul>
                 </nav>

@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
-    protected $fillable = ["title", "body", "slug", "image_path", "category_id", "published_at"];
+    protected $fillable = [
+        "title", "body", "slug", "image_path", "category_id", "published_at", "created_by"
+    ];
 
     public static function boot()
     {
@@ -15,7 +17,6 @@ class Post extends Model
 
         static::saving(function ($post) {
             $post->slug = str_slug($post->title);
-            $post->created_by = 1;  // TODO: use Auth::id()
         });
     }
 

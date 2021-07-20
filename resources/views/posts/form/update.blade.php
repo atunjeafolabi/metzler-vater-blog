@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section("title", "Edit Post")
+
 @section('content')
     <div class="col-lg-8">
         <form action="{{route('update-post', ['slug' => $post->slug])}}" class="bg-light p-5 contact-form" method="POST" enctype="multipart/form-data">
@@ -23,7 +25,7 @@
             @endif
             <h1 class="pb-3">Edit Post</h1>
             <div class="mb-5">
-                <img src="{{env('POST_IMAGE_PUBLIC_PATH').$post->image_path}}" alt="Post Image" class="post-image">
+                <img src="{{env('POST_IMAGE_PUBLIC_PATH').$post->image_path}}" alt="Post Image" class="image-contain">
             </div>
             <div class="form-group">
                 <input type="text" name="title" class="form-control" placeholder="Post title" value="{{old('title', $post->title)}}">

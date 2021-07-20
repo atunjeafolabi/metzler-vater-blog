@@ -52,6 +52,7 @@ class AuthTest extends DuskTestCase
                     ->type('password', 'password')
                     ->type('password_confirmation', 'password')
                     ->type('description', 'This is just a short description about Ben Gates')
+                    ->attach('avatar', __DIR__.'/../fixtures/images/test-image-for-attach.png')
                     ->press('Register')
                     ->screenshot('register')
                     ->assertPathIs('/');

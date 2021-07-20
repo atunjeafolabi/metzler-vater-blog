@@ -49,12 +49,13 @@ class PostTest extends DuskTestCase
                     ->assertMissing(".edit-btn")
                     ->assertMissing(".delete-form")
                     ->assertMissing(".add-new-post")
-                    ->assertSee('Metzler Vater Blog')
                     ->assertSee('Login')
                     ->assertSee('Register')
                     ->waitForText('Categories')
                     ->waitForText('Recent Posts')
-                    ->assertSee('Posts');
+                    ->assertSee('Posts')
+                    ->assertSee('Metzler Vater Blog')
+                    ->screenshot('add_edit_delete_button');
         });
     }
 
@@ -83,28 +84,31 @@ class PostTest extends DuskTestCase
 
         $this->browse(function ($first, $second) use ($user) {
             $first->loginAs($user)
-                    ->visit('/')
-                    ->assertSee('Metzler Vater Blog')
-                    ->waitForText('Categories')
-                    ->waitForText('Recent Posts')
-                    ->assertSee('Posts');
+                  ->visit('/')
+                  ->assertSee('Posts')
+                  ->waitForText('Categories')
+                  ->waitForText('Recent Posts')
+                  ->assertSee('Metzler Vater Blog');
         });
     }
 
-    public function test_that_add_edit_and_delete_buttons_can_be_seen_when_user_is_authenticated()
+    public function test_that_add_edit_and_delete_buttons_can_be_seen_when_post_owner_is_authenticated()
     {
-        $post = factory(Post::class)->create();
         $user = factory(User::class)->create();
 
+        $post = factory(Post::class)->create(['created_by' => $user->id]);
+
         $this->browse(function ($first, $second) use ($post, $user) {
-            $first->loginAs($user)->visit("/posts/{$post->slug}")
-                    ->assertVisible(".edit-btn")
-                    ->assertVisible(".delete-form")
-                    ->assertVisible(".add-new-post")
-                    ->assertSee('Metzler Vater Blog')
-                    ->waitForText('Categories')
-                    ->waitForText('Recent Posts')
-                    ->assertSee('Posts');
+            $first->loginAs($user)
+                  ->visit("/posts/{$post->slug}")
+                  ->assertVisible(".edit-btn")
+                  ->assertVisible(".delete-form")
+                  ->assertVisible(".add-new-post")
+                  ->assertSee('Metzler Vater Blog')
+                  ->waitForText('Categories')
+                  ->waitForText('Recent Posts')
+                  ->assertSee('Posts');
+//                  ->screenshot('add_edit_and_delete_buttons_can_be_seen_when_post_owner_is_authenticated');
         });
     }
 
@@ -118,17 +122,5 @@ class PostTest extends DuskTestCase
                   ->assertVisible("#logout-link")
                   ->assertPresent("#logout-form");
         });
-    }
-
-    public function tearDown(): void
-    {
-        /*
-         * Clear all cookies after each test to avoid authentication issues
-         */
-        $this->browse(function (Browser $browser) {
-            $browser->driver->manage()->deleteAllCookies();
-        });
-
-        parent::tearDown();
     }
 }
