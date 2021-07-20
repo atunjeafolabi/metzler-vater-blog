@@ -12,7 +12,7 @@ use Illuminate\Http\File;
 $factory->define(Post::class, function (Faker $faker) {
 
     $imageName =  $faker->image(
-        env('FILE_STORAGE_PATH') . 'post-image',
+        storage_path('app/' . env('POST_IMAGE_STORAGE_PATH')),
         $width = 650,
         $height = 490,
         null,

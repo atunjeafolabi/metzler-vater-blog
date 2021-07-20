@@ -29,8 +29,8 @@
         <div id="colorlib-page">
             <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
             <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+                <h4>Metzler Vater Blog</h4>
                 <nav id="colorlib-main-menu" role="navigation">
-                    <h4 class="border-bottom">Metzler Vater Blog</h4>
                     <ul class="mt-4">
                         <!-- Authentication Links -->
                         @guest
@@ -56,9 +56,13 @@
                         @endguest
                     </ul>
                     <ul class="mt-3">
-                        <li class="colorlib-active"><a href="{{route('index')}}">Posts</a></li>
+                        <li class="border-top border-bottom"><strong>Posts</strong></li>
+                        <li class="colorlib-active"><a href="{{route('index')}}">All</a></li>
                         @auth
-                            <li><a href="{{route('create-form')}}" class="add-new-post">Add New Post</a></li>
+                            <li><a href="{{route('create-form')}}" class="add-new-post">Add</a></li>
+                            <li class="border-top border-bottom"><strong>Users</strong></li>
+                            <li><a href="{{route('users')}}" class="users">All</a></li>
+                            <li><a href="{{route('create-user-form')}}">Add</a></li>
                         @endauth
                     </ul>
                 </nav>

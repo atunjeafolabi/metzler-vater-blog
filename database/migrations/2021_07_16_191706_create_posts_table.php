@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string("title");
             $table->text("body");
             $table->string("slug")->unique();
-            $table->string("image_path")->nullable();
+            $table->string("image_path")->default('no-image.jpeg');
             $table->bigInteger('category_id')->unsigned();
             $table->timestamp("published_at")->nullable();
             $table->bigInteger("created_by")->unsigned();

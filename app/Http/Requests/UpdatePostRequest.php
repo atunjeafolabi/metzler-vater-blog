@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdatePostRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -26,7 +27,7 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => 'required|string',
             'body' => 'required|string',
-            'post_image' => 'sometimes|mimes:jpeg,jpg,png|max:100000',
+            'post-image' => 'sometimes|mimes:jpeg,jpg,png|max:100000',
             'category_id' => 'required|numeric'
         ];
     }

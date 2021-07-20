@@ -6,7 +6,6 @@ use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Repositories\Contracts\PostRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -66,7 +65,7 @@ class PostController extends Controller
     public function create(CreatePostRequest $request)
     {
         $postData               = $request->validated();
-        $imageName                 = $this->saveImage($request);
+        $imageName              = $this->saveImage($request, 'post-image', env('POST_IMAGE_STORAGE_PATH'));
         $postData["image_path"] = $imageName;
 
         $isPostCreated = $this->postRepository->create($postData);
@@ -92,10 +91,10 @@ class PostController extends Controller
 
     public function update($slug, UpdatePostRequest $request)
     {
-        $postData = $request->except('_method', '_token', 'post_image');
+        $postData = $request->except('_method', '_token', 'post-image');
 
-        if ($request->hasFile('post_image')) {
-            $imageName                 = $this->saveImage($request);
+        if ($request->hasFile('post-image')) {
+            $imageName                 = $this->saveImage($request, 'post-image', env('POST_IMAGE_STORAGE_PATH'));
             $postData["image_path"] = $imageName;
         }
 
@@ -106,19 +105,6 @@ class PostController extends Controller
         }
 
         return redirect()->route('post', ['slug' => $slug]);
-    }
-
-    /**
-     * @param   FormRequest  $request
-     *
-     * @return array|false|string
-     */
-    private function saveImage(FormRequest $request)
-    {
-        $imageName = $request->file('post_image')->store('public/post-image');
-        $imageName = substr($imageName, strlen('public/'));
-
-        return $imageName;
     }
 
     public function delete($slug)

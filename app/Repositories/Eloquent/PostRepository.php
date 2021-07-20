@@ -30,4 +30,18 @@ final class PostRepository extends Repository implements PostRepositoryInterface
 
         return $recentPosts;
     }
+
+    public function update($slug, array $data)
+    {
+        $isUpdated = $this->model->where('slug', $slug)->update($data);
+
+        return $isUpdated;
+    }
+
+    public function delete($slug) : bool
+    {
+        $post = $this->model->where(['slug' => $slug])->first();
+
+        return $post->delete();
+    }
 }

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 interface PostRepositoryInterface
 {
-    public function findbySlug($slug) : ?Model;
+    public function findBySlug($slug) : ?Model;
     public function getRecentPosts() : ?Collection;
+    public function update($slug, array $data);
+    public function delete($slug) : bool;
 }

@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     $avatarFile =  $faker->image(
-        env('FILE_STORAGE_PATH') . 'avatar',
+        storage_path('app/' . env('AVATAR_STORAGE_PATH')),
         $width = 490,
         $height = 490,
         null,

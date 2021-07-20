@@ -3,8 +3,11 @@
 @section('title', 'Posts')
 
 @section('content')
-    <div class="col-xl-8 py-5 px-md-5">
+    <div class="col-xl-8 pb-5 px-md-5">
         <div class="row pt-md-4">
+            <div class="col-lg-12">
+                <h1 class="mb-5">All Posts</h1>
+            </div>
             @foreach($posts as $post)
                 <div class="col-md-12">
                     <div class="blog-entry ftco-animate d-md-flex">

@@ -14,51 +14,54 @@ abstract class Repository implements RepositoryInterface
 
     public function create(array $data): ?Model
     {
-        $post = $this->model->create($data);
+        $model = $this->model->create($data);
 
-        return $post;
+        return $model;
     }
 
     public function findById($id): ?Model
     {
-        $post = $this->model->find($id);
+        $model = $this->model->find($id);
 
-        return $post;
+        return $model;
     }
 
     public function findAll(): ?Collection
     {
-        $posts = $this->model->all();
+        $models = $this->model->all();
 
-        return $posts;
+        return $models;
     }
 
     public function paginate($perPage = 5): LengthAwarePaginator
     {
-        $posts = $this->model->orderBy('created_at', 'DESC')->paginate($perPage);
+        $models = $this->model->orderBy('created_at', 'DESC')->paginate($perPage);
 
-        return $posts;
+        return $models;
     }
 
     public function findWhere($query) : LengthAwarePaginator
     {
-        $posts = $this->model->where($query)->orderBy('created_at', 'DESC')->paginate($perPage = 5);
+        $models = $this->model
+            ->where($query)
+            ->orderBy('created_at', 'DESC')
+            ->paginate($perPage = 5);
 
-        return $posts;
+        return $models;
     }
 
-    public function update($slug, array $data)
+    public function update($id, array $data)
     {
-        $isUpdated = $this->model->where('slug', $slug)->update($data);
+        $isUpdated = $this->model->where('id', $id)->update($data);
 
         return $isUpdated;
     }
 
-    public function delete($slug)
+    public function delete($id) : bool
     {
-        $post = $this->model->where(['slug' => $slug])->first();
+        $model = $this->model->find($id);
 
-        return $post->delete();
+        return ($model ? $model->delete() : false);
     }
 
     public function findBy($attribute, $value): ?Model
