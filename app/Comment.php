@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    protected $fillable = ['title', 'body', 'post_id', 'created_by'];
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');

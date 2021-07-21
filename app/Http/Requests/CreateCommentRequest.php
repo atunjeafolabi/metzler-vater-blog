@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UpdatePostRequest extends FormRequest
+class CreateCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return true;    // TODO: change to Auth::check()
     }
 
     /**
@@ -27,8 +27,7 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'body' => 'required|string',
-            'post-image' => 'sometimes|mimes:jpeg,jpg,png|max:100000',
-            'category_id' => 'required|numeric'
+            'post_id' => 'required|numeric'
         ];
     }
 }

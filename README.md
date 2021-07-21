@@ -2,7 +2,8 @@
 
 Overview
 --------
-This is a simple blogging application that contain the following features:
+This is a simple blogging application available online at http://metzler-vater.thetruckademy.com
+The following features have been implemented:
 
 - Guest area:
     - List posts
@@ -31,6 +32,9 @@ There are two kinds of registered users:
     - An ordinary user cannot:
         - delete their own or other accounts
         - view list of all users
+    > Sample user login details:
+    > - Email: manasseh@example.com
+    > - Password: password
 
 - **Admin user**
     - An admin can:
@@ -38,6 +42,9 @@ There are two kinds of registered users:
         - create users
         - edit users
         - delete users
+    > Sample admin login details:
+    > - Email: bill@mail.co.uk
+    > - Password: password
 
 Tech Stack
 ------------
@@ -113,9 +120,13 @@ Future Works
 ------------
 - Implement search functionality
 - Improve User interface
+- Nested replies to comments
 - Add more tests
 
 Issues
 ------
 - If you face any difficulty in setting this project up locally or have other issues, kindly create a github [issue](https://github.com/atunjeafolabi/metzler-vater-blog/issues).
 
+
+
+[http://metzler-vater.thetruckademy.com/]: http://metzler-vater.thetruckademy.com/

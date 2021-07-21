@@ -25,7 +25,7 @@ class CreatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string',
+            'title' => 'required|string|max:255',
             'body' => 'required|string',
             'post-image' => 'required|image',
             'category_id' => 'required|numeric'

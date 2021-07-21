@@ -52,60 +52,68 @@
                     @foreach($post->comments as $comment)
                         <li class="comment">
                             <div class="vcard bio">
-                                <img src="{{env('AVATAR_PUBLIC_PATH').$comment->creator->avatar}}" alt="Image placeholder">
+                                <img src="{{env('AVATAR_PUBLIC_PATH').$comment->creator->avatar}}" alt="Image placeholder" class="avatar-tiny">
                             </div>
                             <div class="comment-body">
                                 <h3>{{$comment->creator->name}}</h3>
-                                <div class="meta">October 03, 2018 at 2:21pm</div>
-                                <p>{{$comment->body}}<p>
-                                    <a href="#" class="reply">Reply</a>
+                                <div class="meta">{{$comment->created_at}}</div>
+                                <p>
+                                    {{$comment->body}}<p>
+{{--                                    <a href="#" class="reply">Reply</a>--}}
                                 </p>
                             </div>
 
-                            <ul class="children">
-                                @foreach($comment->replies as $reply)
-                                    <li class="comment">
-                                        <div class="vcard bio">
-                                            <img src="{{env('AVATAR_PUBLIC_PATH').$reply->creator->avatar}}" alt="Avatar">
-                                        </div>
-                                        <div class="comment-body">
-                                            <h3>{{$reply->creator->name}}</h3>
-                                            <div class="meta">{{$reply->created_at}}</div>
-                                            <p>{{$reply->body}}</p>
-{{--                                            <p><a href="#" class="reply">Reply</a></p>--}}
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
+{{--                            <ul class="children">--}}
+{{--                                @foreach($comment->replies as $reply)--}}
+{{--                                    <li class="comment">--}}
+{{--                                        <div class="vcard bio">--}}
+{{--                                            <img src="{{env('AVATAR_PUBLIC_PATH').$reply->creator->avatar}}" alt="Avatar" class="avatar-tiny">--}}
+{{--                                        </div>--}}
+{{--                                        <div class="comment-body">--}}
+{{--                                            <h3>{{$reply->creator->name}}</h3>--}}
+{{--                                            <div class="meta">{{$reply->created_at}}</div>--}}
+{{--                                            <p>{{$reply->body}}</p>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                @endforeach--}}
+{{--                            </ul>--}}
                         </li>
                     @endforeach
                 </ul>
 
-                <div class="comment-form-wrap pt-5">
+                <div class="comment-form-wrap pt-5" id="comments-section">
                     <h3 class="mb-5">Leave a comment</h3>
-                    <form action="#" class="p-3 p-md-5 bg-light">
-                        <div class="form-group">
-                            <label for="name">Name *</label>
-                            <input type="text" class="form-control" id="name">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="website">Website</label>
-                            <input type="url" class="form-control" id="website">
-                        </div>
+                    @endif
+                    @auth()
+                        <form action="{{route('create-comment')}}" class="p-3 p-md-5 bg-light" method="POST">
+                            {{csrf_field()}}
+                            <input type="hidden" name="post_id" value="{{$post->id}}">
+                            <div class="form-group">
+                                <label for="comment-title">Title *</label>
+                                <input type="text" name="title" class="form-control" id="comment-title" value="{{old('title')}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea name="body" id="message" cols="30" rows="10" class="form-control">{{old('body')}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-                        </div>
+                        </form>
+                    @else
+                        <p>You must be logged in to drop a comment. <a href="{{route('login')}}">Login</a></p>
+                    @endauth
 
-                    </form>
                 </div>
             </div>
         </div><!-- END-->

@@ -17,9 +17,16 @@ final class PostRepository extends Repository implements PostRepositoryInterface
         $this->model = $post;
     }
 
-    public function findBySlug($slug) : ?Model
+    public function findBySlug($slug) : ?Post
     {
         $post = $this->model->where(["slug" => $slug])->first();
+
+        return $post;
+    }
+
+    public function findWithComments($slug) : ?Post
+    {
+        $post = $this->model->with('comments')->where(['slug' => $slug])->first();
 
         return $post;
     }

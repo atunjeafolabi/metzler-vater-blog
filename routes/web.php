@@ -36,6 +36,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/users/{id}/update', 'UserController@showUpdateForm')
          ->name('update-user-form');
     Route::put('/users/{id}', 'UserController@update')->name('update-user');
+
+    // Routes for Comments
+    Route::post('/comments', 'CommentController@create')->name('create-comment');
 });
 
 Route::get('/', 'PostController@index')->name('index');
