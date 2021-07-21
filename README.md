@@ -67,6 +67,7 @@ Setup:
 - Create a symbolic link with `php artisan storage:link` to make the contents in the `storage/app/public` directory publicly accessible
 - Generate an app key with `php artisan key:generate`
 - Run migrations with seeders ```php artisan migrate --seed```
+    > It may take up to 20 seconds for the seeding to complete because Faker is downloading dummy images to use locally.
 - Start local dev server: ```php artisan serve --port=8000``` 
 
 Usage
