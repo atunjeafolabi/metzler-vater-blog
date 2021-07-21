@@ -106,7 +106,7 @@ class PostController extends Controller
         $postData = $request->except('_method', '_token', 'post-image');
 
         if ($request->hasFile('post-image')) {
-            $imageName                 = $this->saveImage($request, 'post-image', env('POST_IMAGE_STORAGE_PATH'));
+            $imageName              = $this->saveImage($request, 'post-image', env('POST_IMAGE_STORAGE_PATH'));
             $postData["image_path"] = $imageName;
         }
 

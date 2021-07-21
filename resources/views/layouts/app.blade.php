@@ -64,13 +64,23 @@
                     </ul>
                     <ul class="mt-3">
                         <li class="border-top border-bottom"><strong>Posts</strong></li>
-                        <li class="colorlib-active"><a href="{{route('index')}}">All</a></li>
+                        <li class="{{ request()->routeIs('index') ? 'colorlib-active' : '' }}">
+                            <a href="{{route('index')}}">All</a>
+                        </li>
                         @auth()
-                            <li><a href="{{route('create-post-form')}}" class="add-new-post">Add</a></li>
+                            <li class="{{ request()->routeIs('create-post-form') ? 'colorlib-active' : '' }}">
+                                <a href="{{route('create-post-form')}}" class="add-new-post">Add</a>
+                            </li>
                             @if(auth()->user()->isAdmin())
-                                <li class="border-top border-bottom"><strong>Users</strong></li>
-                                <li><a href="{{route('users')}}" class="users">All</a></li>
-                                <li><a href="{{route('create-user-form')}}">Add</a></li>
+                                <li class="border-top border-bottom">
+                                    <strong>Users</strong>
+                                </li>
+                                <li class="{{ request()->routeIs('users') ? 'colorlib-active' : '' }}">
+                                    <a href="{{route('users')}}" class="users">All</a>
+                                </li>
+                                <li class="{{ request()->routeIs('create-user-form') ? 'colorlib-active' : '' }}">
+                                    <a href="{{route('create-user-form')}}">Add</a>
+                                </li>
                             @endif
                         @endauth
                     </ul>

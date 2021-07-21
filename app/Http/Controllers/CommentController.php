@@ -25,7 +25,6 @@ class CommentController extends Controller
 
         $isCreated = $this->commentRepository->create($commentData);
 
-        return redirect()->to(url()->previous() . '/#comments-section');
-        ;
+        return redirect()->to(url()->previous() . '#comments-section');
     }
 }

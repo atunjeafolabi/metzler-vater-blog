@@ -14,7 +14,7 @@ class CreateCommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;    // TODO: change to Auth::check()
+        return Auth::check();
     }
 
     /**
@@ -24,6 +24,8 @@ class CreateCommentRequest extends FormRequest
      */
     public function rules()
     {
+        $this->redirect = url()->previous() . '#create-comment-form';
+
         return [
             'title' => 'required|string|max:255',
             'body' => 'required|string',

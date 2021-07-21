@@ -44,7 +44,7 @@
             </div>
             <div class="col-lg-12 pt-5">
 
-                <h3 class="mb-3 font-weight-bold">
+                <h3 class="mb-3 font-weight-bold" id="comments-section">
                     {{$post->comments->count()}} &nbsp;
                     {{str_plural("Comment", $post->comments->count())}}
                 </h3>
@@ -81,7 +81,7 @@
                     @endforeach
                 </ul>
 
-                <div class="comment-form-wrap pt-5" id="comments-section">
+                <div class="comment-form-wrap pt-5" id="create-comment-form">
                     <h3 class="mb-5">Leave a comment</h3>
                     @if ($errors->any())
                         <div class="alert alert-danger">

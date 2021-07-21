@@ -8,8 +8,13 @@
             <div class="col-lg-12">
                 <h1 class="mb-5">All Posts</h1>
             </div>
+            @if($posts->isEmpty())
+                <div class="col-lg-12">
+                    <p>No posts available</p>
+                </div>
+            @endif
             @foreach($posts as $post)
-                <div class="col-md-12">
+                <div class="col-lg-12">
                     <div class="blog-entry ftco-animate d-md-flex">
                         <a href="{{route('post', ['slug' => $post->slug])}}" class="img img-2" style="background-image: url({{env('POST_IMAGE_PUBLIC_PATH').$post->image_path}});"></a>
                         <div class="text text-2 pl-md-4">
