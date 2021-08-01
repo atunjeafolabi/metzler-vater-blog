@@ -9,9 +9,6 @@
 
     <title>@yield("title")</title>
 
-{{--    <!-- Scripts -->--}}
-{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
-
     <!-- Styles -->
     <link rel="stylesheet" href="/css/vendor/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="/css/vendor/animate.css">
