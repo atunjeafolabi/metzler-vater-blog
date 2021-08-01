@@ -68,6 +68,7 @@ Setup:
 - Generate an app key with `php artisan key:generate`
 - Run migrations with seeders ```php artisan migrate --seed```
     > It may take up to 20 seconds for the seeding to complete because Faker is downloading dummy images to use locally.
+- Run `npm install` followed by `npm run dev` to setup frontend assets
 - Start local dev server: ```php artisan serve --port=8000``` 
 
 Usage
@@ -105,7 +106,7 @@ Visit the local homepage at `localhost:8000`
 Running Test:
 ------------
 - Create a sqlite database file named `test-database.sqlite` in the database folder of the Laravel application.
-- Ensure that `.env.dusk` is included in the root of the aplication
+- Ensure that `.env.dusk` is included in the root of the application
 - Start test server on another port using `php artisan serve --env=dusk --port=8001`
 - Run ```php artisan dusk```
 
